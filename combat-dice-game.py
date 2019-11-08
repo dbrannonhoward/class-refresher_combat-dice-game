@@ -1,3 +1,4 @@
+import null
 import random
 
 
@@ -20,6 +21,7 @@ class combatant:
             self.luck -= 1
         return strike_damage_best
 
+
 class fight:
     def __init__(self, challenger_one: combatant, challenger_two: combatant):
         self.challenger_one = challenger_one
@@ -30,12 +32,6 @@ class fight:
             challenger_one.defense) + " defense " + " and " + challenger_two.name + " with " + str(
             challenger_two.defense) + " defense!")
 
-    def round_of_combat(self, challenger_one, challenger_two, round_number):
-        # Alternating attacks, note that while challenger_one always attacks first, even if challenger_two is defense<0 they get to attack as well
-        fight.calc_result(challenger_one, challenger_two)
-        fight.calc_result(challenger_two, challenger_one)
-        # print("Round " + str(round_number) + " of combat complete!\n")
-
     def calc_result(self, attacker, defender):
         attacker = attacker
         defender = defender
@@ -44,25 +40,31 @@ class fight:
         # print(attacker.name + " the " + attacker.combat_class + " attacks " + defender.name + " for " + str(damage) + " damage!")
         # print(defender.name + " has " + str(defender.defense) + " defense remaining!")
 
+    def combat_loop(self, challenger_one, challenger_two):
+        round_number = 1
+        while challenger_one.defense > 0 and challenger_two.defense > 0:
+            fight.round_of_combat(null, challenger_one, challenger_two, round_number)
+            round_number += 1
+
     def declare_winner(self, challenger_one, challenger_two):
         if challenger_one.defense > challenger_two.defense:
             print("The winner is " + challenger_one.name + "!")
         else:
             print("The winner is " + challenger_two.name + "!")
 
-    def combat_loop(self, challenger_one, challenger_two):
-        round_number = 1
-        while challenger_one.defense > 0 and challenger_two.defense > 0:
-            fight.round_of_combat(challenger_one, challenger_two, round_number)
-            round_number += 1
+    def round_of_combat(self, challenger_one, challenger_two, round_number):
+        # Alternating attacks, note that while challenger_one always attacks first, even if challenger_two is defense<0 they get to attack as well
+        fight.calc_result(null, challenger_one, challenger_two)
+        fight.calc_result(null, challenger_two, challenger_one)
+        # print("Round " + str(round_number) + " of combat complete!\n")
+
 
 test_number = 15
 while test_number > 0:
-    enemy = combatant("Wes", "Moonmaster", 2, 100, 4, 9)
-    ally = combatant("Bran", "Suncaster", 2, 100, 4, 1)
-    combatants = (enemy, ally)
-    fight.announcement(enemy, ally)
-    fight.combat_loop(enemy, ally)
-    fight.declare_winner(enemy, ally)
+    enemy = combatant("Name_one", "Moonmaster", 2, 100, 4, 9)
+    ally = combatant("Name_two", "Suncaster", 2, 100, 4, 1)
+    fight.announcement(null, enemy, ally)
+    fight.combat_loop(null, enemy, ally)
+    fight.declare_winner(null, enemy, ally)
     test_number -= 1
 # end
