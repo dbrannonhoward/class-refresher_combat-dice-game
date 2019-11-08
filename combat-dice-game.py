@@ -2,7 +2,7 @@ import null
 import random
 
 
-class combatant:
+class Combatant:
     def __init__(self, name, combat_class, attack: float, defense: float, strength: float, luck: float):
         self.name = name
         self.combat_class = combat_class
@@ -22,7 +22,7 @@ class combatant:
         return strike_damage_best
 
 
-class fight:
+class Fight:
     def __init__(self, challenger_one: combatant, challenger_two: combatant):
         self.challenger_one = challenger_one
         self.challenger_two = challenger_two
